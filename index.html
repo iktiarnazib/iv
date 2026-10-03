@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intrinsic Value Real Estate Advisers</title>
+<meta name="description" content="I-VREA helps investors and investment managers make progress through clear investment thinking and better organisation — think better, organise better, decide better, invest better.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M4 46C16 12 28 10 33 34c4 20 15 20 27-8' fill='none' stroke='%2386BC25' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --magenta:#D6197E; --magenta-deep:#A80E60;
+  --green:#86BC25;  --green-deep:#5C8616;
+  --ink:#21271C; --body:#3E4536; --muted:#7B8371;
+  --paper:#FBFBF6; --card:#FFFFFF; --line:#E6E8DC;
+  --radius:18px;
+  --shadow:0 12px 32px rgba(33,39,28,.08);
+  --head:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--magenta);color:#fff}
+:focus-visible{outline:2px solid var(--green-deep);outline-offset:3px;border-radius:4px}
+img,svg{display:block}
+.container{width:min(1120px,92%);margin:0 auto}
+.i{width:1em;height:1em;flex:none}
+
+/* ---------- Header ---------- */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:100;background:rgba(251,251,246,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+.site-header.scrolled{box-shadow:0 6px 24px rgba(33,39,28,.08)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:76px;gap:20px}
+.brand{display:inline-flex;flex-direction:column;text-decoration:none;line-height:1}
+.brand-lockup{position:relative;display:inline-block;padding:10px 8px}
+.brand-wave{position:absolute;left:-4%;top:-14%;width:108%;height:128%;color:var(--green);z-index:0}
+.brand-text{position:relative;z-index:1;font-weight:800;font-size:1.45rem;letter-spacing:.02em}
+.t-m{color:var(--magenta)}.t-g{color:var(--green)}
+.brand-sub{margin-top:5px;font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--green-deep);font-weight:700;white-space:nowrap}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{position:relative;padding:6px 2px;font-size:.93rem;font-weight:500;color:var(--body);text-decoration:none;white-space:nowrap}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--magenta);transition:right .28s ease}
+.nav a:hover::after,.nav a.active::after{right:0}
+.nav a.active{color:var(--ink)}
+.nav .nav-cta{background:var(--magenta);color:#fff;border-radius:999px;padding:10px 20px;font-weight:600}
+.nav .nav-cta::after{display:none}
+.nav .nav-cta:hover{background:var(--magenta-deep)}
+.nav .nav-cta.active{background:var(--ink)}
+.menu-btn{display:none;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;background:none;border:none;cursor:pointer;padding:10px}
+.menu-btn span{display:block;height:2px;width:100%;background:var(--ink);border-radius:2px;transition:transform .3s}
+.menu-btn.open span:nth-child(1){transform:translateY(4px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){transform:translateY(-4px) rotate(-45deg)}
+.mobile-nav{position:fixed;top:76px;left:0;right:0;z-index:99;background:var(--paper);border-bottom:1px solid var(--line);padding:14px 5% 22px;display:grid;gap:2px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s}
+.mobile-nav.open{opacity:1;visibility:visible;transform:none}
+.mobile-nav a{padding:13px 6px;font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.mobile-nav a.active{color:var(--magenta)}
+.mobile-nav .nav-cta{margin-top:14px;text-align:center;background:var(--magenta);color:#fff;border-radius:999px;border-bottom:none;padding:13px}
+
+/* ---------- Pages / reveals ---------- */
+main{padding-top:76px}
+.page{display:none}
+.page.active{display:block;animation:pageIn .45s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+[data-reveal].revealed{opacity:1;transform:none}
+
+/* ---------- Heroes ---------- */
+.hero{position:relative;overflow:hidden;text-align:center;padding:88px 0 48px}
+.hero::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(134,188,37,.16),transparent 65%);top:-200px;right:-140px;pointer-events:none}
+.hero::after{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(214,25,126,.10),transparent 65%);bottom:-220px;left:-140px;pointer-events:none}
+.kicker{display:inline-flex;align-items:center;gap:12px;text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:700;color:var(--green-deep)}
+.kicker::before{content:"";width:28px;height:2px;background:linear-gradient(90deg,var(--magenta),var(--green))}
+.hero-quote{font-family:var(--head);font-style:italic;font-weight:450;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.18;color:var(--ink);max-width:24ch;margin:20px auto 14px}
+.hero-quote .q{color:var(--magenta);font-weight:700}
+.attribution{color:var(--muted);font-size:.95rem;letter-spacing:.08em}
+.mini-wave{width:130px;height:28px;margin:26px auto 0}
+.better-line{margin-top:22px;font-family:var(--head);font-size:clamp(1.3rem,3.2vw,2.05rem);font-weight:500;color:var(--ink);display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:.35em .6em}
+.better-line em{font-style:italic;font-weight:600}
+.better-line em.m{color:var(--magenta)}
+.better-line em.g{color:var(--green-deep)}
+.better-line .dot{color:var(--green);font-size:.55em}
+.page-hero{position:relative;text-align:center;padding:66px 0 8px}
+.page-hero h1{font-family:var(--head);font-weight:500;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.2;color:var(--ink);max-width:26ch;margin:18px auto 0}
+.page-hero h1 em{color:var(--magenta)}
+.page-hero .attribution{margin-top:12px}
+.page-lede{max-width:62ch;margin:20px auto 0;font-size:1.05rem;line-height:1.75}
+
+/* ---------- Sections ---------- */
+.section{padding:64px 0}
+.tight-top{padding-top:38px}
+.section-title{font-family:var(--head);font-weight:550;font-size:clamp(1.6rem,3vw,2.3rem);color:var(--ink);line-height:1.25}
+.section-head{margin-bottom:34px}
+.intro-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start}
+.intro-grid .lede{font-family:var(--head);font-weight:480;font-size:clamp(1.25rem,2.3vw,1.6rem);line-height:1.45;color:var(--ink);margin-top:18px}
+.intro-copy p{margin-bottom:1.15em;line-height:1.75}
+.prose{max-width:760px;margin:0 auto}
+.prose p{margin-bottom:1.15em;line-height:1.78}
+
+/* ---------- Pull band & CTA ---------- */
+.pull-band{position:relative;background:linear-gradient(135deg,rgba(134,188,37,.10),rgba(214,25,126,.07));border:1px solid var(--line);border-radius:26px;padding:46px 42px;text-align:center}
+.pull-text{font-family:var(--head);font-size:clamp(1.15rem,2.4vw,1.55rem);line-height:1.55;color:var(--ink);max-width:58ch;margin:16px auto 0}
+.pull-text em{color:var(--magenta)}
+.cta-band{display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between;background:var(--ink);color:#fff;border-radius:26px;padding:38px 42px;position:relative;overflow:hidden}
+.cta-band::after{content:"";position:absolute;right:-60px;top:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(134,188,37,.35),transparent 65%);pointer-events:none}
+.cta-band h2{font-family:var(--head);font-weight:500;font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:6px}
+.cta-band p{color:#C8CCB6;font-size:.95rem;position:relative;z-index:1}
+.cta-band .btn{position:relative;z-index:1}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:13px 26px;font-weight:600;font-size:.95rem;font-family:var(--sans);border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:.25s}
+.btn-primary{background:var(--magenta);color:#fff}
+.btn-primary:hover{background:var(--magenta-deep);transform:translateY(-2px)}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-light:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+
+/* ---------- Cards ---------- */
+.cards-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .3s,box-shadow .3s,border-color .3s;text-decoration:none;color:inherit}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(134,188,37,.5)}
+.icon-chip{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:16px}
+.icon-chip svg{width:24px;height:24px}
+.icon-chip.m{background:rgba(214,25,126,.1);color:var(--magenta)}
+.icon-chip.g{background:rgba(134,188,37,.16);color:var(--green-deep)}
+.wwd h3{font-family:var(--head);font-weight:550;font-size:1.35rem;color:var(--ink);margin-bottom:10px}
+.wwd p{font-size:.94rem;line-height:1.65;margin-bottom:18px}
+.card-link{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.88rem;color:var(--magenta)}
+.card-link .i{transition:transform .25s}
+.card:hover .card-link .i{transform:translateX(5px)}
+
+/* ---------- Consulting areas ---------- */
+.areas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:14px 0 44px}
+.area-card{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;transition:.3s}
+.area-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.area-card .icon-chip{margin:0;width:44px;height:44px;flex:none}
+.area-card h3{font-size:.98rem;font-weight:600;color:var(--ink);line-height:1.4}
+.engagements{list-style:none;max-width:840px;margin:26px auto 0}
+.engagements li{display:flex;gap:24px;align-items:flex-start;padding:22px 4px;border-bottom:1px solid var(--line)}
+.engagements li:last-child{border-bottom:none}
+.eng-num{font-family:var(--head);font-weight:600;font-size:1.5rem;line-height:1.3;min-width:52px}
+.engagements li:nth-child(odd) .eng-num{color:var(--magenta)}
+.engagements li:nth-child(even) .eng-num{color:var(--green-deep)}
+.engagements p{line-height:1.65}
+
+/* ---------- Clients ---------- */
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.client-head{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.mono{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-weight:800;font-size:.78rem;letter-spacing:.03em;flex:none}
+.mono.m{background:rgba(214,25,126,.1);color:var(--magenta)}
+.mono.g{background:rgba(134,188,37,.16);color:var(--green-deep)}
+.client h3{font-size:1.02rem;font-weight:600;color:var(--ink);line-height:1.35}
+.client p{font-size:.92rem;line-height:1.65}
+
+/* ---------- Thoughts ---------- */
+.rss-badge{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.82rem;font-weight:600;color:var(--green-deep)}
+.rss-badge svg{width:15px;height:15px;color:var(--magenta)}
+.thought-card h3{font-family:var(--head);font-weight:550;font-size:1.32rem;color:var(--ink);margin-bottom:10px}
+.thought-card p{font-size:.93rem;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:18px}
+.readmore{display:inline-flex;align-items:center;gap:8px;margin-top:auto;background:none;border:none;padding:0;font-family:var(--sans);font-weight:600;font-size:.88rem;color:var(--green-deep);cursor:pointer}
+.readmore:hover{color:var(--magenta)}
+.readmore .i{transition:transform .25s}
+.readmore:hover .i{transform:translateX(5px)}
+
+/* ---------- Team ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;align-items:start}
+.team-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:34px}
+.team-head{display:flex;gap:18px;align-items:center;margin-bottom:16px}
+.avatar{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:1.15rem;color:#fff;flex:none;letter-spacing:.03em}
+.avatar.m{background:linear-gradient(135deg,var(--magenta),#F0559F)}
+.avatar.g{background:linear-gradient(135deg,var(--green),#A9D34F)}
+.team-head h2{font-family:var(--head);font-weight:550;font-size:1.5rem;color:var(--ink);line-height:1.2}
+.role{display:block;margin-top:4px;color:var(--muted);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:.73rem;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--body);background:#FAFBF4}
+.team-card p{font-size:.93rem;line-height:1.72;margin-bottom:12px}
+.team-card p:last-child{margin-bottom:0}
+
+/* ---------- Contact ---------- */
+.contact-wrap{text-align:center;padding:26px 0 70px;position:relative}
+.contact-wave{width:min(560px,80%);height:44px;margin:0 auto 8px;opacity:.7}
+.email-big{display:inline-flex;align-items:center;gap:14px;margin:26px 0 30px;font-family:var(--head);font-style:italic;font-weight:500;font-size:clamp(1.4rem,3.6vw,2.2rem);color:var(--magenta);text-decoration:none;border-bottom:3px solid transparent;transition:.25s}
+.email-big:hover{border-color:var(--magenta)}
+.email-big svg{width:.85em;height:.85em}
+.contact-actions{display:flex;justify-content:center}
+
+/* ---------- Footer ---------- */
+footer{background:#F4F6E9;border-top:1px solid var(--line);margin-top:46px}
+.footer-wave{width:100%;height:46px;opacity:.55}
+.footer-inner{padding:34px 0 34px}
+.foot-brand .brand-text{font-size:1.9rem}
+.foot-brand .brand-sub{font-size:.62rem}
+.foot-nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin:26px 0 20px}
+.foot-nav a{color:var(--body);font-size:.92rem;font-weight:500;text-decoration:none}
+.foot-nav a:hover{color:var(--magenta)}
+.foot-legal{display:flex;flex-wrap:wrap;gap:6px 26px;margin-bottom:14px}
+.linklike{background:none;border:none;padding:0;font-family:var(--sans);font-size:.84rem;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.linklike:hover{color:var(--magenta)}
+.copyright{color:var(--muted);font-size:.84rem}
+
+/* ---------- Modal & toast ---------- */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(25,30,18,.45);backdrop-filter:blur(3px);display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:.28s}
+.overlay.open{opacity:1;visibility:visible}
+.modal{position:relative;background:#fff;max-width:640px;width:100%;max-height:82vh;overflow:auto;border-radius:22px;padding:36px;transform:translateY(16px) scale(.98);transition:.28s}
+.overlay.open .modal{transform:none}
+.modal h3{font-family:var(--head);font-weight:550;font-size:1.45rem;color:var(--ink);margin-bottom:16px;padding-right:36px}
+.modal p{line-height:1.75;margin-bottom:1em}
+.modal .modal-note{color:var(--muted);font-style:italic}
+.modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:1.2rem;line-height:1;cursor:pointer;color:var(--muted);transition:.2s}
+.modal-close:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,16px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:999px;font-size:.88rem;font-weight:500;opacity:0;visibility:hidden;transition:.3s;z-index:300;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .nav{display:none}
+  .menu-btn{display:flex}
+  .brand-sub{display:none}
+  .intro-grid{grid-template-columns:1fr;gap:28px}
+}
+@media (max-width:640px){
+  .hero{padding-top:64px}
+  .section{padding:48px 0}
+  .pull-band,.cta-band{padding:32px 26px}
+  .engagements li{gap:16px}
+  .team-card{padding:26px}
+  .modal{padding:28px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- shared gradient for waves -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gradWave" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#D6197E"/><stop offset="1" stop-color="#86BC25"/>
+</linearGradient></defs></svg>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#/home" class="brand" aria-label="I-VREA — home">
+      <img src="iveralogo.png" alt="I-VREA" style="height:52px">
+      <span class="brand-sub">Intrinsic Value Real Estate Advisers</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#/home" data-nav="home">Home</a>
+      <a href="#/consulting" data-nav="consulting">Consulting</a>
+      <a href="#/training" data-nav="training">Training</a>
+      <a href="#/clients" data-nav="clients">Clients</a>
+      <a href="#/thoughts" data-nav="thoughts">Thoughts</a>
+      <a href="#/team" data-nav="team">Team</a>
+      <a href="#/contact" data-nav="contact" class="nav-cta">Contact us</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#/home" data-nav="home">Home</a>
+    <a href="#/consulting" data-nav="consulting">Consulting</a>
+    <a href="#/training" data-nav="training">Training</a>
+    <a href="#/clients" data-nav="clients">Clients</a>
+    <a href="#/thoughts" data-nav="thoughts">Thoughts</a>
+    <a href="#/team" data-nav="team">Team</a>
+    <a href="#/contact" data-nav="contact" class="nav-cta">Contact us</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section class="page" id="page-home">
+  <div class="hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Intrinsic Value Real Estate Advisers</p>
+      <h1 class="hero-quote" data-reveal><span class="q">“</span>People calculate too much and think too little.<span class="q">”</span></h1>
+      <p class="attribution" data-reveal>— Charlie Munger</p>
+      <svg class="mini-wave" viewBox="0 0 148 28" data-reveal aria-hidden="true"><path d="M2 14c12-14 24-14 36 0s24 14 36 0 24-14 36 0 24 14 36 0" fill="none" stroke="url(#gradWave)" stroke-width="3.5" stroke-linecap="round"/></svg>
+      <p class="better-line" data-reveal>
+        <span>Think <em class="m">Better.</em></span><span class="dot">●</span>
+        <span>Organise <em class="g">Better.</em></span><span class="dot">●</span>
+        <span>Decide <em class="m">Better.</em></span><span class="dot">●</span>
+        <span>Invest <em class="g">Better.</em></span>
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container intro-grid">
+      <div>
+        <h2 class="section-title" data-reveal>Think better about real estate.</h2>
+        <p class="lede" data-reveal>Technical knowledge is essential for successful investment, but it is rarely sufficient to produce consistently high-quality investment decisions.</p>
+      </div>
+      <div class="intro-copy">
+        <p data-reveal>Intrinsic Value Real Estate Advisers was established out of a desire to help investors, and investment managers, make progress through clear investment thinking and designing the organisation to produce consistently better investment decisions.</p>
+        <p data-reveal>In an asset class prone to biases, accepted wisdoms and decisions justified by market practice, it is hard to distinguish signals from noise, to know what is useful and what is not, and, ultimately, to make progress. We aim to help by adopting and adapting the principles of value-investing to real estate, which we have been doing for over twenty years, as the basis for an intrinsic value investment framework, but also by blending broader evidence from research and behavioural insights into that framework.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="pull-band" data-reveal>
+        <svg class="mini-wave" style="margin:0 auto" viewBox="0 0 148 28" aria-hidden="true"><path d="M2 14c12-14 24-14 36 0s24 14 36 0 24-14 36 0 24 14 36 0" fill="none" stroke="url(#gradWave)" stroke-width="3.5" stroke-linecap="round"/></svg>
+        <p class="pull-text">We do this by providing consultancy to the real estate industry, and beyond — as a discrete project, or a longer-term strategic relationship. <em>We can act as both sounding board and sparring partner.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:8px">
+    <div class="container">
+      <div class="section-head"><h2 class="section-title" data-reveal>What we do</h2></div>
+      <div class="cards-3">
+        <a class="card wwd" href="#/consulting" data-reveal>
+          <span class="icon-chip m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.6-3 7.6-7 9.5-4-1.9-7-4.9-7-9.5V6l7-3z"/><path d="M9 11.8l2.1 2.1 4.4-4.4"/></svg></span>
+          <h3>Consulting</h3>
+          <p>Partnering with groups and individuals on governance, documentation, process, risk, decision making, research and strategy.</p>
+          <span class="card-link">Explore <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="card wwd" href="#/training" data-reveal>
+          <span class="icon-chip g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg></span>
+          <h3>Training</h3>
+          <p>Thought-provoking, practical courses that increase self-awareness — an antidote to traditional real estate training.</p>
+          <span class="card-link">Explore <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="card wwd" href="#/thoughts" data-reveal>
+          <span class="icon-chip m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span>
+          <h3>Thoughts</h3>
+          <p>Short thoughts on topics of relevance to real estate investment — signals, noise, alpha, narratives and more.</p>
+          <span class="card-link">Explore <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:8px">
+    <div class="container">
+      <div class="cta-band" data-reveal>
+        <div>
+          <h2>Think we can help?</h2>
+          <p>Please contact us for further information.</p>
+        </div>
+        <a class="btn btn-light" href="#/contact">Contact us <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ CONSULTING ============ -->
+<section class="page" id="page-consulting">
+  <div class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Consulting</p>
+      <h1 data-reveal>Sounding board. <em>Sparring partner.</em></h1>
+      <p class="page-lede" data-reveal>The main part of our business is consulting services. We aim to partner with groups, and individuals, and work with them to make progress on a broad range of issues covering:</p>
+    </div>
+  </div>
+
+  <section class="section tight-top">
+    <div class="container">
+      <div class="areas-grid">
+        <div class="area-card" data-reveal><span class="icon-chip m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.6-3 7.6-7 9.5-4-1.9-7-4.9-7-9.5V6l7-3z"/><path d="M9 11.8l2.1 2.1 4.4-4.4"/></svg></span><h3>Investment governance</h3></div>
+        <div class="area-card" data-reveal><span class="icon-chip g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h5"/></svg></span><h3>(Fund) documentation</h3></div>
+        <div class="area-card" data-reveal><span class="icon-chip m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8 16.5l8-9"/></svg></span><h3>Investment approach and process</h3></div>
+        <div class="area-card" data-reveal><span class="icon-chip g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 14.5a7.5 7.5 0 0 1 15 0"/><path d="M12 14.5l3.5-4.5"/><circle cx="12" cy="14.5" r="1.2"/></svg></span><h3>Investment risk and investment risk management</h3></div>
+        <div class="area-card" data-reveal><span class="icon-chip m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V4"/><path d="M12 7h6.2L20 5.2 18.2 3.4H12z"/><path d="M12 14H5.8L4 12.2 5.8 10.4H12z"/></svg></span><h3>Decision making</h3></div>
+        <div class="area-card" data-reveal><span class="icon-chip g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5l-4.8-4.8"/><path d="M8.5 11h5M11 8.5v5"/></svg></span><h3>Research and strategy</h3></div>
+      </div>
+
+      <div class="prose">
+        <p data-reveal>Our work aims to bring experience and diversity of thought to your group, helping to raise its potential by unpacking, (re-)building and developing your business in a clear and robust way, challenging the status quo where necessary and never accepting “market practice” as a rationale for a way of doing things. We aim to act as both sounding board and sparring partner.</p>
+      </div>
+
+      <div class="section-head" style="margin-top:52px"><h2 class="section-title" data-reveal>Typical engagements</h2></div>
+      <ol class="engagements">
+        <li data-reveal><span class="eng-num">01</span><p>Working with an emerging investment manager to help develop their corporate and investment governance to win business for their first fund/mandate</p></li>
+        <li data-reveal><span class="eng-num">02</span><p>Working with an established manager as an independent challenger to help ensure that progress is continuous, predictable surprises are avoided and that employees are able to buy in to any changes</p></li>
+        <li data-reveal><span class="eng-num">03</span><p>Helping an investor establish a strategy and process to reach their specific goals in the simplest and most certain way</p></li>
+        <li data-reveal><span class="eng-num">04</span><p>Providing research and strategy support to in-house teams, tackling projects where internal resources are insufficient and where gains are to be made from thoughtful interventions</p></li>
+        <li data-reveal><span class="eng-num">05</span><p>Independent advisory board or investment committee member to represent investors in a fund</p></li>
+      </ol>
+
+      <div class="cta-band" data-reveal style="margin-top:52px">
+        <div>
+          <h2>Please contact us for further information.</h2>
+          <p>We would be glad to discuss how we can help.</p>
+        </div>
+        <a class="btn btn-light" href="#/contact">Contact us <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ TRAINING ============ -->
+<section class="page" id="page-training">
+  <div class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Training</p>
+      <h1 data-reveal><span class="q" style="color:var(--magenta)">“</span>Learn from the mistakes of others. You can’t live long enough to make them all yourself.<span class="q" style="color:var(--magenta)">”</span></h1>
+      <p class="attribution" data-reveal>— Eleanor Roosevelt</p>
+    </div>
+  </div>
+
+  <section class="section tight-top">
+    <div class="container prose">
+      <p data-reveal>As part of our services, we offer training, which is aimed to be both thought provoking and practical, for experienced and less-experienced real estate professionals and for those who rely upon real estate professionals’ views e.g. board directors. Training can be tailored to suit a business’ particular requirement.</p>
+      <p data-reveal>Often unorthodox, our training aims to introduce concepts that may not be known and to debunk some that are well known, along with increasing self-awareness and the role of group dynamics in decision making. Attendees should leave with a set of tools to help them think more clearly about real estate investment, risk and decision making and to put in place processes to make better investment decisions. We don’t offer traditional training in real estate investment, nor do we run courses in financial modelling; our courses are an antidote to these.</p>
+      <p data-reveal>Russell has run numerous training days across Europe and Asia for real estate senior managers, fund managers and transaction staff. Vicki has helped run a number of training days for industry professionals. Both Russell and Vicki bring their experience as both academics and practitioners to help think about simple approaches to complex issues.</p>
+      <p data-reveal>We run in-house bespoke training days as well as courses.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:8px">
+    <div class="container">
+      <div class="cards-3" style="max-width:820px;margin:0 auto">
+        <a class="card wwd" href="#/contact" data-reveal>
+          <span class="icon-chip m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <h3>A short course in thinking about real estate investment</h3>
+          <p><span class="chip" style="margin-right:6px">Compact</span><span class="chip">Open &amp; in-house</span></p>
+          <span class="card-link">Enquire <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="card wwd" href="#/contact" data-reveal>
+          <span class="icon-chip g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z"/><path d="M12 8v4M12 15.5h.01"/></svg></span>
+          <h3>Bespoke Courses on Real Estate Investment</h3>
+          <p><span class="chip" style="margin-right:6px">Tailored to you</span><span class="chip">In-house</span></p>
+          <span class="card-link">Enquire <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ CLIENTS ============ -->
+<section class="page" id="page-clients">
+  <div class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Clients</p>
+      <h1 data-reveal>Who we <em>work with.</em></h1>
+    </div>
+  </div>
+  <section class="section tight-top">
+    <div class="container clients-grid">
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">TMF</span><h3>TMF Luxembourg</h3></div><p>I-VREA provided bespoke training to employees of TMF Luxembourg designed to support their knowledge of real estate investment.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">EC</span><h3>Europa Capital</h3></div><p>We were delighted to support Europa in a strategic review of the business.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">CP</span><h3>Cromwell Property Group</h3></div><p>We were delighted to support Cromwell Property Group by facilitating a workshop session at their European Senior Management Team’s conference.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">LH</span><h3>Langham Hall Fund Management (Jersey) Limited</h3></div><p>We provided bespoke training to members of Langham Hall’s Jersey office designed to help support board directors in their roles.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">IPF</span><h3>Investment Property Forum</h3></div><p>We were appointed by the Investment Property Forum to carry out a project entitled “Mitigating behavioural influences on decision making within the property investment process”. The resulting report is published by the IPF.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">PF</span><h3>Property Funds Research</h3></div><p>We supported Property Funds Research on an innovative real estate investment project.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">BP</span><h3>Brydell Partners IM LLP</h3></div><p>We were appointed by Brydell Partners IM LLP as a strategic adviser.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">IPF</span><h3>Investment Property Forum</h3></div><p>We were appointed by the Investment Property Forum to carry out a project entitled “Key contributions of IPF research to Property Investment Processes in the UK”. The report and webinar are published by the IPF.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">OX</span><h3>University of Oxford, Said Business School</h3></div><p>Russell, who was an Associate Fellow of the University of Oxford’s Said Business School, helped to deliver a bespoke real estate programme, alongside Professor Andrew Baum, for the Kuwait Foundation for the Advancement of Sciences.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">PR</span><h3>Principal Real Estate Europe</h3></div><p>We were delighted to provide an independent investment committee member as part of the ongoing governance for the Principal Eurozone Durable Income Fund, PEDIF.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">LG</span><h3>UK Local Government Pension Scheme Pool</h3></div><p>We supported this pool as they worked towards their target operating model for the management of their partner funds’ property assets.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">UK</span><h3>UK Investment Manager</h3></div><p>We carried out a review of investment governance and investment processes for a UK-based investment manager which was looking to expand its business lines.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono m">COS</span><h3>COS Capital</h3></div><p>We worked as a strategic consultant to Chinese Real Estate Asset Management Firm COS Capital, which has operations in Asia, the US and Europe. In addition, we carried out a short-term project.</p></article>
+      <article class="card client" data-reveal><div class="client-head"><span class="mono g">CB</span><h3>Cass Business School</h3></div><p>In this project, we supported Cass Business School’s work for the Investment Property Forum (IPF) on the Size and Structure of the UK Property Market for the 2017 and 2018 updates.</p></article>
+    </div>
+  </section>
+</section>
+
+<!-- ============ THOUGHTS ============ -->
+<section class="page" id="page-thoughts">
+  <div class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Thoughts</p>
+      <h1 data-reveal>Short thoughts on <em>real estate investment.</em></h1>
+      <p class="page-lede" data-reveal>Here are some short thoughts on topics of relevance to real estate investment. You can subscribe (without entering any personal data) by linking this page to your RSS feed.</p>
+      <div data-reveal><span class="rss-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" fill="currentColor" stroke="none"/><path d="M4 11a9 9 0 0 1 9 9M4 5.5A14.5 14.5 0 0 1 18.5 20"/></svg>Subscribe via RSS — no personal data needed</span></div>
+    </div>
+  </div>
+  <section class="section tight-top">
+    <div class="container"><div class="cards-3" id="thoughtsGrid"></div></div>
+  </section>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="page" id="page-team">
+  <div class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Team</p>
+      <h1 data-reveal>Academics <em>and</em> practitioners.</h1>
+      <p class="page-lede" data-reveal>I-VREA is led by two directors who combine academic rigour with decades of industry experience.</p>
+    </div>
+  </div>
+  <section class="section tight-top">
+    <div class="container team-grid">
+
+      <article class="team-card" data-reveal>
+        <div class="team-head">
+          <span class="avatar m">RC</span>
+          <div><h2>Russell Chaplin</h2><span class="role">Director &amp; Co-founder</span></div>
+        </div>
+        <div class="chips"><span class="chip">25+ years experience</span><span class="chip">Ex-CIO &amp; Managing Partner</span><span class="chip">PhD (Cantab)</span><span class="chip">RICS Chartered Surveyor</span><span class="chip">Oxford Said Associate Fellow</span></div>
+        <p>Russell is a Director and co-founder of I-VREA. He has over 25 years of investment management, business development, business strategy and real estate strategy experience. Russell has been a Managing Partner for a Private Equity Real Estate Business and sat on the Board of Directors of three UK-regulated multi-asset investment management businesses.</p>
+        <p>He has held the roles of Managing Partner, Chief Investment Officer, Global Real Estate Strategist and Director of Research, at Europa Capital LLP, Aberdeen, UBS Global Asset Management and Henderson Global Investors (Nuveen) respectively.</p>
+        <p>He also worked at Property Market Analysis (PMA), where he was the Investment Analyst and, at the University of Cambridge, he led a Joseph Rowntree Foundation sponsored research project into the relationship between Housing Association and Market Rents and assisted on a project for Eurotunnel Developments Ltd.</p>
+        <p>Russell was also an Associate Fellow of Said Business School at the University of Oxford and taught on the MBA elective, the MBA and open programmes. He was also a lecturer in Land Economy at the University of Cambridge, Director of Studies in Land Economy for various Cambridge colleges, and a visiting lecturer in Land Economy at the University of Aberdeen.</p>
+        <p>He has appeared on Bloomberg, CNN (Asia) and BNN (Canada), and has published articles in peer-reviewed journals and the property press. He has also been invited to provide input to the Bank of England’s Commercial Property Forum on a number of occasions.</p>
+        <p>He holds a Ph.D. and M.Phil. in Land Economy from the University of Cambridge and a BSc (Hons.) in Estate Management from Heriot-Watt University. Russell is a Chartered Surveyor and member of RICS.</p>
+      </article>
+
+      <article class="team-card" data-reveal>
+        <div class="team-head">
+          <span class="avatar g">VL</span>
+          <div><h2>Vicki Law</h2><span class="role">Director &amp; Co-founder</span></div>
+        </div>
+        <div class="chips"><span class="chip">PhD (Reading)</span><span class="chip">Academic &amp; Practitioner</span><span class="chip">IPF Consultant</span><span class="chip">British Swimming Referee</span></div>
+        <p>Vicki is a Director and co-founder of I-VREA. Alongside her work at I-VREA, she has been a tutor for The Brilliant Club, a UK charity that exists to increase the number of pupils from underrepresented backgrounds progressing to highly-selective universities.</p>
+        <p>She has worked, lived and studied in the UK, the Netherlands and France, holding research and investment analysis roles at Hammerson (Paris) and PRICOA (Rockspring, now Patrizia), and a client relations role at IPD (MSCI).</p>
+        <p>Vicki has also worked as a consultant to the Investment Property Forum (IPF), was a Lecturer in the University of Reading’s Land Management department and has taught on Henry Stewart courses regarding valuation and investment. For the IPF Education Trust, Vicki helped to implement a Ph.D. studentship programme. She also held a research post at the College of Estate Management looking at property depreciation and procurement.</p>
+        <p>She holds a PhD and MPhil in Land Management from the University of Reading and a BA (Hons.) in Humanities from the University of Greenwich. Vicki has published a number of papers resulting from her PhD work in both peer-reviewed journals and through industry-body research programmes.</p>
+        <p>Vicki is an Aquatics GB, British Swimming Referee, and has refereed across the East Region, including at the 2012 Olympic pool in Stratford.</p>
+      </article>
+
+    </div>
+  </section>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="page" id="page-contact">
+  <div class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Contact us</p>
+      <h1 data-reveal>Start a <em>conversation.</em></h1>
+    </div>
+  </div>
+  <section class="section tight-top">
+    <div class="container contact-wrap">
+      <svg class="contact-wave" viewBox="0 0 560 44" data-reveal aria-hidden="true"><path d="M4 30C70 4 130 4 190 26s120 26 180 4 120-22 186-16" fill="none" stroke="url(#gradWave)" stroke-width="3" stroke-linecap="round"/></svg>
+      <p class="page-lede" data-reveal>If you click on the link below, a new e-mail to us should open in your default e-mail program.</p>
+      <div data-reveal>
+        <a class="email-big" href="mailto:contact@i-vrea.com">contact@i-vrea.com
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></svg>
+        </a>
+      </div>
+      <div class="contact-actions" data-reveal>
+        <button class="btn btn-ghost" id="copyEmail">
+          <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          Copy address
+        </button>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <svg class="footer-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 36 C 240 4, 480 4, 720 32 C 960 60, 1200 60, 1440 28" fill="none" stroke="url(#gradWave)" stroke-width="3"/></svg>
+  <div class="container footer-inner">
+    <div class="foot-brand">
+      <a href="#/home" class="brand" aria-label="I-VREA — home">
+        <span class="brand-lockup">
+          <svg class="brand-wave" viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true"><path d="M6 52 C 42 8, 74 4, 106 30 C 132 50, 152 58, 174 53 C 194 49, 208 33, 216 19" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg>
+          <span class="brand-text"><span class="t-m">I-V</span><span class="t-g">REΛ</span></span>
+        </span>
+        <span class="brand-sub">Intrinsic Value Real Estate Advisers</span>
+      </a>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#/home">Home</a><a href="#/consulting">Consulting</a><a href="#/training">Training</a><a href="#/clients">Clients</a><a href="#/thoughts">Thoughts</a><a href="#/team">Team</a><a href="#/contact">Contact us</a>
+    </nav>
+    <div class="foot-legal">
+      <button class="linklike" data-legal="cookies">Cookies and Your Privacy</button>
+      <button class="linklike" data-legal="terms">Terms and Conditions of Use</button>
+    </div>
+    <p class="copyright">© Copyright, Intrinsic Value Real Estate Advisers Ltd.</p>
+  </div>
+</footer>
+
+<!-- modal + toast -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- Thoughts content ---------- */
+var THOUGHTS=[
+ {t:"Something to read?",x:"This year’s festive season books are focussed around decision making and are some of the books that were used as input to our work for the Investment Property Forum entitled “Mitigating behavioural influences on decision-making within the property investment process”."},
+ {t:"To IRR is human",x:"The analytical metric-of-choice for the private equity real estate industry is the internal rate of return, or IRR. It is a prime example of Charlie Munger’s view that “people calculate too much and think too little” - it requires a computer to run iterations that would take a human a lot of time and no thought whatsoever. And it doesn’t tell you if you are making an investment."},
+ {t:"Stories",x:"Now might be a good time to read Nobel Prize winner Robert Shiller’s book, Narrative Economics, published in 2019. In it he argues that “economic fluctuations are substantially driven by contagion of oversimplified and easily transmitted variants of economic narratives”."},
+ {t:"Books",x:"It is that time of the year when giving or receiving a book might be on the agenda. Here are some ideas for books that may interest you, or others: Never Bullshit the Client - The Psychology of Money - Patient Capital - Non-consensus Investing - The Art of Statistics."},
+ {t:"Shadows",x:"Real estate investors often use interest rates as part of their investment-decision making process. But strange things are happening to interest rates and the use, or not, of negative interest rates has been the focus of much attention."},
+ {t:"Systemic?",x:"Does the dominance of large, institutional real estate managers give rise to the potential for systemic risks and can this be capitalised on?"},
+ {t:"\u201CUp to...\u201D",x:"Documentation for private real estate funds is written so that risk is unbundled and limited, e.g. “up to” 60% leverage. With the option to use low levels of risk preserved, why do higher risk capacity funds tend to underperform in a downturn?"},
+ {t:"The Alpha Bet",x:"If an investor can persistently generate positive alpha, this may well be linked to investment skill. So, what is alpha and how good has the real estate industry been at generating it?"},
+ {t:"Noise?",x:"In engineering, noise is a disturbance around a signal and engineers have become good at extracting signals from the noise. It is for real estate investors to become engineers, to try and extract the signal and produce some clarity."}
+];
+var ARROW='<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+var grid=document.getElementById('thoughtsGrid');
+THOUGHTS.forEach(function(p,i){
+  var el=document.createElement('article');
+  el.className='card thought-card';el.setAttribute('data-reveal','');
+  el.innerHTML='<h3>'+p.t+'</h3><p>'+p.x+'</p><button class="readmore" data-i="'+i+'">Read more '+ARROW+'</button>';
+  grid.appendChild(el);
+});
+grid.addEventListener('click',function(e){
+  var b=e.target.closest('.readmore');if(!b)return;
+  var p=THOUGHTS[+b.dataset.i];
+  openModal(p.t,'<p>'+p.x+'</p><p class="modal-note">— Intrinsic Value Real Estate Advisers</p>');
+});
+
+/* ---------- Legal modals ---------- */
+var LEGAL={
+ cookies:{t:'Cookies and Your Privacy',b:'<p>This website does not use advertising or tracking cookies, and it does not collect or store any personal data. Subscribing to our <strong>Thoughts</strong> feed via RSS also requires no personal information.</p><p>If you contact us by e-mail, we will use your details only to respond to your enquiry.</p>'},
+ terms:{t:'Terms and Conditions of Use',b:'<p>The content of this website is provided for general information only. It does not constitute investment, legal, tax or other professional advice and should not be relied upon as such.</p><p>© Copyright, Intrinsic Value Real Estate Advisers Ltd. All rights reserved.</p>'}
+};
+document.querySelectorAll('[data-legal]').forEach(function(btn){
+  btn.addEventListener('click',function(){var l=LEGAL[btn.dataset.legal];openModal(l.t,l.b);});
+});
+
+/* ---------- Modal ---------- */
+var overlay=document.getElementById('overlay'),
+    mTitle=document.getElementById('modalTitle'),
+    mBody=document.getElementById('modalBody');
+function openModal(t,h){mTitle.textContent=t;mBody.innerHTML=h;overlay.classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();closeMenu();}});
+
+/* ---------- Toast ---------- */
+var toastEl=document.getElementById('toast'),toastTimer;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove('show');},2400);}
+
+/* ---------- Copy email ---------- */
+document.getElementById('copyEmail').addEventListener('click',function(){
+  var t='contact@i-vrea.com';
+  function done(){toast('Copied — '+t);}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done).catch(function(){toast(t);});}
+  else{var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){toast(t);}ta.remove();}
+});
+
+/* ---------- Router ---------- */
+var PAGES=['home','consulting','training','clients','thoughts','team','contact'];
+var TITLES={home:'Intrinsic Value Real Estate Advisers',consulting:'Consulting — Intrinsic Value Real Estate Advisers',training:'Training — Intrinsic Value Real Estate Advisers',clients:'Clients — Intrinsic Value Real Estate Advisers',thoughts:'Thoughts — Intrinsic Value Real Estate Advisers',team:'Team — Intrinsic Value Real Estate Advisers',contact:'Contact us — Intrinsic Value Real Estate Advisers'};
+function route(){
+  var h=(location.hash||'').replace(/^#\/?/,'')||'home';
+  if(PAGES.indexOf(h)<0)h='home';
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  var page=document.getElementById('page-'+h);
+  page.classList.add('active');
+  document.querySelectorAll('a[data-nav]').forEach(function(a){
+    var on=a.dataset.nav===h;
+    a.classList.toggle('active',on);
+    if(on){a.setAttribute('aria-current','page');}else{a.removeAttribute('aria-current');}
+  });
+  document.title=TITLES[h];
+  closeMenu();
+  window.scrollTo(0,0);
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=page.querySelectorAll('[data-reveal]');
+  els.forEach(function(el,i){
+    el.classList.remove('revealed');
+    if(reduce){el.classList.add('revealed');return;}
+    setTimeout(function(){el.classList.add('revealed');},80+i*70);
+  });
+}
+window.addEventListener('hashchange',route);
+
+/* ---------- Mobile menu ---------- */
+var menuBtn=document.getElementById('menuBtn'),mobileNav=document.getElementById('mobileNav');
+function closeMenu(){mobileNav.classList.remove('open');menuBtn.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}
+menuBtn.addEventListener('click',function(){
+  var open=mobileNav.classList.toggle('open');
+  menuBtn.classList.toggle('open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+});
+
+/* ---------- Header shadow ---------- */
+window.addEventListener('scroll',function(){
+  document.getElementById('siteHeader').classList.toggle('scrolled',window.scrollY>8);
+},{passive:true});
+
+route();
+</script>
+</body>
+</html>
